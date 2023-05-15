@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { validate } from "./validate";
 
 const Form = () => {
   const [data, setData] = useState({
@@ -10,12 +11,24 @@ const Form = () => {
   });
   const { name, email, pass, confirmpass, isAgreed } = data;
 
+  const [error, setError] = useState({});
+
+  useEffect(() => {
+    setError(validate(data));
+  }, [data]);
+
   const changeHandler = (event) => {
     if (event.target.name === "isAgreed") {
       setData({ ...data, isAgreed: !isAgreed });
     } else {
       setData({ ...data, [event.target.name]: event.target.value });
     }
+  };
+
+  const [touch, setTouch] = useState({});
+
+  const focusHandler = (e) => {
+    setTouch({ ...touch, [e.target.name]: true });
   };
 
   return (
@@ -30,7 +43,9 @@ const Form = () => {
             name="name"
             value={name}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {error.name && touch.name && error.name}
         </div>
 
         <div>
@@ -40,7 +55,9 @@ const Form = () => {
             name="email"
             value={email}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {error.email &&touch.email && error.email}
         </div>
 
         <div>
@@ -50,7 +67,9 @@ const Form = () => {
             name="pass"
             value={pass}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {error.pass && touch.pass && error.pass}
         </div>
 
         <div>
@@ -60,7 +79,9 @@ const Form = () => {
             name="confirmpass"
             value={confirmpass}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {error.confirmpass && touch.confirmpass && error.confirmpass}
         </div>
 
         <div>
@@ -70,7 +91,9 @@ const Form = () => {
             name="isAgreed"
             value={isAgreed}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {error.isAgreed && touch.isAgreed && error.isAgreed}
         </div>
 
         <a href="#">Login</a>
