@@ -31,9 +31,25 @@ const Form = () => {
     setTouch({ ...touch, [e.target.name]: true });
   };
 
+  const formSubmit = (e) => {
+    e.preventDefault();
+
+    if (!Object.keys(error)) {
+        console.log('submited');
+    } else {
+      setTouch({
+        name: true,
+        email: true,
+        pass: true,
+        confirmpass: true,
+        isAgreed: true,
+      });
+    }
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={formSubmit}>
         <h2>Form</h2>
 
         <div>
@@ -57,7 +73,7 @@ const Form = () => {
             onChange={changeHandler}
             onFocus={focusHandler}
           />
-          {error.email &&touch.email && error.email}
+          {error.email && touch.email && error.email}
         </div>
 
         <div>
