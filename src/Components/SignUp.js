@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { validate } from "./validate";
 import { ToastContainer } from "react-toastify";
 import { toastNotif } from "./toast";
+import "./SignUp.css";
 
 import Input from "./Input";
 
@@ -53,41 +54,51 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={formSubmit}>
-        <h2>Form</h2>
+    <div className="container">
+      <form className="formContainer" onSubmit={formSubmit}>
+        <h2 className="header">Sign Up</h2>
 
         <Input
+          inp={error.name && touch.name ? "uncompleted" : "formInput"}
+          classname="formField"
           label="Username :"
           type="text"
           name="name"
           value={name}
           onChange={changeHandler}
           onFocus={focusHandler}
-          condition={error.name && touch.name && error.name}
+          condition={error.name && touch.name && <span>{error.name}</span>}
         />
 
         <Input
+          inp={error.email && touch.email ? "uncompleted" : "formInput"}
+          classname="formField"
           label="Email :"
           type="text"
           name="email"
           value={email}
           onChange={changeHandler}
           onFocus={focusHandler}
-          condition={error.email && touch.email && error.email}
+          condition={error.email && touch.email && <span>{error.email}</span>}
         />
 
         <Input
+          inp={error.pass && touch.pass ? "uncompleted" : "formInput"}
+          classname="formField"
           label="Password :"
           name="pass"
           type="password"
           value={pass}
           onChange={changeHandler}
           onFocus={focusHandler}
-          condition={error.pass && touch.pass && error.pass}
+          condition={error.pass && touch.pass && <span>{error.pass}</span>}
         />
 
         <Input
+          inp={
+            error.confirmpass && touch.confirmpass ? "uncompleted" : "formInput"
+          }
+          classname="formField"
           label="Confirm Password :"
           name="confirmpass"
           type="password"
@@ -95,22 +106,32 @@ const Form = () => {
           onChange={changeHandler}
           onFocus={focusHandler}
           condition={
-            error.confirmpass && touch.confirmpass && error.confirmpass
+            error.confirmpass &&
+            touch.confirmpass && <span>{error.confirmpass}</span>
           }
         />
 
-        <Input
-          label="I accept agreement"
-          type="checkbox"
-          name="isAgreed"
-          value={isAgreed}
-          onChange={changeHandler}
-          onFocus={focusHandler}
-          condition={error.isAgreed && touch.isAgreed && error.isAgreed}
-        />
+        <div className="formField">
+          <div className="checkBoxContainer">
+            <label>I accept agreement</label>
+            <input
+              className={
+                error.isAgreed && touch.isAgreed ? "uncompleted" : "formInput"
+              }
+              type="checkbox"
+              name="isAgreed"
+              value={isAgreed}
+              onChange={changeHandler}
+              onFocus={focusHandler}
+            />
+          </div>
+          {error.isAgreed && touch.isAgreed && <span>{error.isAgreed}</span>}
+        </div>
 
-        <a href="#">Login</a>
-        <button type="submit">SignUp</button>
+        <div className="formButtons">
+          <a href="#">Login</a>
+          <button type="submit">SignUp</button>
+        </div>
 
         <ToastContainer />
       </form>
