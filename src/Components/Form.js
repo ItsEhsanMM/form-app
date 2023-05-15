@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { validate } from "./validate";
+import { ToastContainer } from "react-toastify";
+import { toastNotif } from "./toast";
 
 const Form = () => {
   const [data, setData] = useState({
@@ -34,9 +36,10 @@ const Form = () => {
   const formSubmit = (e) => {
     e.preventDefault();
 
-    if (!Object.keys(error)) {
-        console.log('submited');
+    if (!Object.keys(error).length) {
+      toastNotif("SignUp successfull", "success");
     } else {
+      toastNotif("Invalid data", "error");
       setTouch({
         name: true,
         email: true,
@@ -114,6 +117,7 @@ const Form = () => {
 
         <a href="#">Login</a>
         <button type="submit">SignUp</button>
+        <ToastContainer />
       </form>
     </div>
   );
