@@ -3,6 +3,8 @@ import { validate } from "./validate";
 import { ToastContainer } from "react-toastify";
 import { toastNotif } from "./toast";
 
+import Input from "./Input";
+
 const Form = () => {
   const [data, setData] = useState({
     name: "",
@@ -37,7 +39,7 @@ const Form = () => {
     e.preventDefault();
 
     if (!Object.keys(error).length) {
-      toastNotif("SignUp successfull", "success");
+      toastNotif("Sign Up successfull", "success");
     } else {
       toastNotif("Invalid data", "error");
       setTouch({
@@ -55,68 +57,61 @@ const Form = () => {
       <form onSubmit={formSubmit}>
         <h2>Form</h2>
 
-        <div>
-          <label>UserName :</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          />
-          {error.name && touch.name && error.name}
-        </div>
+        <Input
+          label="Username :"
+          type="text"
+          name="name"
+          value={name}
+          onChange={changeHandler}
+          onFocus={focusHandler}
+          condition={error.name && touch.name && error.name}
+        />
 
-        <div>
-          <label>Email :</label>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          />
-          {error.email && touch.email && error.email}
-        </div>
+        <Input
+          label="Email :"
+          type="text"
+          name="email"
+          value={email}
+          onChange={changeHandler}
+          onFocus={focusHandler}
+          condition={error.email && touch.email && error.email}
+        />
 
-        <div>
-          <label>Password :</label>
-          <input
-            type="password"
-            name="pass"
-            value={pass}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          />
-          {error.pass && touch.pass && error.pass}
-        </div>
+        <Input
+          label="Password :"
+          name="pass"
+          type="password"
+          value={pass}
+          onChange={changeHandler}
+          onFocus={focusHandler}
+          condition={error.pass && touch.pass && error.pass}
+        />
 
-        <div>
-          <label>Confirm Password :</label>
-          <input
-            type="text"
-            name="confirmpass"
-            value={confirmpass}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          />
-          {error.confirmpass && touch.confirmpass && error.confirmpass}
-        </div>
+        <Input
+          label="Confirm Password :"
+          name="confirmpass"
+          type="password"
+          value={confirmpass}
+          onChange={changeHandler}
+          onFocus={focusHandler}
+          condition={
+            error.confirmpass && touch.confirmpass && error.confirmpass
+          }
+        />
 
-        <div>
-          <label>I accept agreement</label>
-          <input
-            type="checkbox"
-            name="isAgreed"
-            value={isAgreed}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          />
-          {error.isAgreed && touch.isAgreed && error.isAgreed}
-        </div>
+        <Input
+          label="I accept agreement"
+          type="checkbox"
+          name="isAgreed"
+          value={isAgreed}
+          onChange={changeHandler}
+          onFocus={focusHandler}
+          condition={error.isAgreed && touch.isAgreed && error.isAgreed}
+        />
 
         <a href="#">Login</a>
         <button type="submit">SignUp</button>
+
         <ToastContainer />
       </form>
     </div>
