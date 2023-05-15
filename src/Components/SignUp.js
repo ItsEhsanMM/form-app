@@ -5,8 +5,9 @@ import { toastNotif } from "./toast";
 import "./SignUp.css";
 
 import Input from "./Input";
+import { Link } from "react-router-dom";
 
-const Form = () => {
+const SignUp = () => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -19,7 +20,7 @@ const Form = () => {
   const [error, setError] = useState({});
 
   useEffect(() => {
-    setError(validate(data));
+    setError(validate(data,'signup'));
   }, [data]);
 
   const changeHandler = (event) => {
@@ -129,7 +130,7 @@ const Form = () => {
         </div>
 
         <div className="formButtons">
-          <a href="#">Login</a>
+          <Link to="/login">Login</Link>
           <button type="submit">SignUp</button>
         </div>
 
@@ -139,4 +140,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default SignUp;
